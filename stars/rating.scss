@@ -1,1 +1,45 @@
-/**/
+.rating {
+    $size: 2em;
+    position: relative;
+    width: $size * 5;
+    height: $size;
+    background-image: url(off.svg); /*2*/
+    background-size: $size auto; /*2*/
+    background-repeat: repeat-x; /*5*/
+
+    &__star {
+        appearance: none; /*скрыть стандартную отрисовку*/
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: $size;
+        height: $size;
+        /*background-color: #9b9b9b; сначала он, потом картинка*/
+        font-size: inherit;
+        margin: 0;
+        background-size: $size auto; /*4*/
+        background-repeat: repeat-x; /*5*/
+
+        &:focus {
+            outline: none; /*3*/
+        }
+
+        &:checked,
+        &:hover {
+            background-image: url(on.svg); /*4*/
+            /*hover - 7*/
+            cursor: pointer;
+        }
+
+        &:hover ~ .rating__star {
+            background-image: url(off.svg); /*8*/
+        }
+
+        @for $i from 1 through 5 {
+            &:nth-of-type(#{$i}) {
+                width: $size * $i;
+                z-index: 6 - $i;
+            }
+        }
+    }
+}
